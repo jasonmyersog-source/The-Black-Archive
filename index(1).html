@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050807">
+<title>CICADA 3302 // CLASSIFIED ARCHIVE</title>
+<style>
+:root{--bg:#050807;--panel:#0b1210;--line:#1c3b2d;--green:#83ffad;--muted:#8aa497;--red:#ff6464}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#143324 0%,#050807 55%);color:#d8f3e1;font:15px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;min-height:100vh}
+main{width:min(900px,92vw);margin:0 auto;padding:38px 0 70px}.top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:12px;letter-spacing:.12em;border-bottom:1px solid var(--line);padding-bottom:14px}
+h1{font-size:clamp(30px,7vw,58px);line-height:1.05;letter-spacing:.08em;color:var(--green);margin:42px 0 8px;text-shadow:0 0 22px #43ff8b33}
+.sub{color:var(--muted);letter-spacing:.18em;font-size:12px}.notice{border:1px solid var(--line);background:#09110d;padding:15px 17px;margin:28px 0;color:#b6d9c2}
+.panel{border:1px solid var(--line);background:linear-gradient(145deg,#0b1510,#070b09);padding:22px;margin:18px 0;box-shadow:0 12px 40px #0005}
+.panel h2{color:var(--green);font-size:16px;letter-spacing:.12em;margin:0 0 14px}.tag{color:var(--muted);font-size:11px;letter-spacing:.15em}
+.code{font-size:clamp(18px,4vw,25px);color:#fff;letter-spacing:.12em;overflow-wrap:anywhere;background:#030605;border:1px solid #173323;padding:16px;margin:14px 0}
+input{width:100%;background:#030605;color:var(--green);border:1px solid #28523b;padding:14px;font:inherit;outline:none}input:focus{border-color:var(--green);box-shadow:0 0 0 2px #83ffad22}
+button{background:var(--green);color:#061009;border:0;padding:12px 18px;margin-top:12px;font:700 12px ui-monospace,monospace;letter-spacing:.1em;cursor:pointer}button:hover{filter:brightness(1.1)}.feedback{min-height:24px;color:var(--muted);margin:10px 0 0}.good{color:var(--green)}.bad{color:var(--red)}
+.progress{height:5px;background:#17231b;margin:22px 0}.bar{height:100%;width:0;background:var(--green);transition:width .3s}
+.locked{opacity:.45}.hidden{display:none}.footer{border-top:1px solid var(--line);margin-top:34px;padding-top:18px;color:#6e8979;font-size:11px}
+a{color:var(--green)}.small{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<div class="top"><span>INDEPENDENT SIGNAL ARCHIVE</span><span>FILE: 3302-A // STATUS: ACTIVE</span></div>
+<h1>CICADA 3302</h1>
+<div class="sub">CLASSIFIED ARCHIVE · UNKNOWN ORIGIN · MEDIUM CLEARANCE</div>
+<div class="notice"><strong>INCOMING TRANSMISSION</strong><br>We left three locks in the archive. Each answer opens the next record. No personal information is requested or collected. The signal is yours to solve.</div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<section class="panel" id="stage1">
+<div class="tag">RECORD 01 / ROTATION</div><h2>THE FIRST LOCK</h2>
+<p>The message has been shifted. Restore the original text.</p>
+<div class="code">WKH GRRU LV RSHQ</div>
+<input id="a1" autocomplete="off" placeholder="ENTER DECODED MESSAGE">
+<button onclick="check(1)">SUBMIT ANSWER</button><p class="feedback" id="f1"></p>
+<p class="small">HINT: Each letter moved three places forward in the alphabet.</p>
+</section>
+<section class="panel locked" id="stage2">
+<div class="tag">RECORD 02 / MACHINE LANGUAGE</div><h2>THE SECOND LOCK</h2>
+<p>Convert this binary sequence into text.</p>
+<div class="code">01001000 01001001 01000100 01000100 01000101 01001110</div>
+<input id="a2" autocomplete="off" placeholder="ENTER THE WORD">
+<button onclick="check(2)">SUBMIT ANSWER</button><p class="feedback" id="f2"></p>
+<p class="small">HINT: Each group of eight bits represents one character.</p>
+</section>
+<section class="panel locked" id="stage3">
+<div class="tag">RECORD 03 / INITIAL TRACE</div><h2>THE FINAL LOCK</h2>
+<p>Take the first letter of each word from the recovered message in Record 01.</p>
+<div class="code">THE DOOR IS OPEN</div>
+<input id="a3" autocomplete="off" placeholder="ENTER FOUR LETTERS">
+<button onclick="check(3)">SUBMIT ANSWER</button><p class="feedback" id="f3"></p>
+<p class="small">HINT: Read the initials from left to right.</p>
+</section>
+<section class="panel hidden" id="final">
+<div class="tag">CLEARANCE GRANTED</div><h2>ARCHIVE UNSEALED</h2>
+<div class="code">3302 // YOU FOUND THE SIGNAL</div>
+<p>The records are open. But the archive contains no explanation of who created it—or why it was waiting.</p>
+<p class="small">END OF TRANSMISSION.</p>
+</section>
+<div class="footer">FICTIONAL PUZZLE EXPERIENCE · NOT AFFILIATED WITH THE ORIGINAL CICADA 3301<br>All puzzles run locally in your browser. No accounts, tracking, or data collection.</div>
+</main>
+<script>
+const solved=[false,false,false];
+function check(n){
+ const expected={1:"THE DOOR IS OPEN",2:"HIDDEN",3:"TDIO"}[n];
+ const value=document.getElementById("a"+n).value.trim().toUpperCase().replace(/\s+/g," ");
+ const feedback=document.getElementById("f"+n);
+ if(value===expected){
+  solved[n-1]=true;feedback.textContent="ACCEPTED // RECORD UNLOCKED";feedback.className="feedback good";
+  if(n<3){const next=document.getElementById("stage"+(n+1));next.classList.remove("locked");next.scrollIntoView({behavior:"smooth",block:"center"});}
+  else{document.getElementById("final").classList.remove("hidden");document.getElementById("final").scrollIntoView({behavior:"smooth",block:"center"});}
+  document.getElementById("bar").style.width=(solved.filter(Boolean).length/3*100)+"%";
+ }else{feedback.textContent="ACCESS DENIED // CHECK THE MESSAGE";feedback.className="feedback bad";}
+}
+</script>
+</body>
+</html>
