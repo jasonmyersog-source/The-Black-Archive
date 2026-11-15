@@ -1,178 +1,247 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#050807">
-<title>CICADA 3302 // THE BLACK ARCHIVE</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050606">
+<title>THE BLACK ARCHIVE</title>
 <style>
-:root{--bg:#050807;--panel:#0a110e;--line:#1d4935;--green:#8cffb4;--dim:#78a88c;--red:#ff6464;--amber:#e8c77b;--text:#d5e8dc}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#143323 0%,#050807 55%);color:var(--text);font:15px/1.65 "Courier New",monospace;min-height:100vh}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background:repeating-linear-gradient(0deg,transparent 0 3px,#9cffba 4px);mix-blend-mode:screen}
-.wrap{max-width:980px;margin:auto;padding:24px 16px 70px}.top{display:flex;justify-content:space-between;gap:14px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:14px}
-.brand{letter-spacing:.22em;color:var(--green);font-weight:bold;font-size:12px}.status{font-size:11px;color:var(--amber);border:1px solid #6d5b2c;padding:4px 8px}
-h1{font-size:clamp(34px,7vw,66px);line-height:1.02;letter-spacing:.07em;color:var(--green);margin:34px 0 8px;text-shadow:0 0 22px #37ff8650}
-.sub{color:var(--dim);letter-spacing:.18em;font-size:12px}.warning{border-left:3px solid var(--red);padding:10px 14px;background:#170b0b;color:#e9b6b6;margin:24px 0}
-.grid{display:grid;grid-template-columns:1fr 250px;gap:16px;margin-top:22px}.panel{border:1px solid var(--line);background:#08100cdd;padding:18px;box-shadow:0 10px 40px #0006}.panel h2{font-size:14px;letter-spacing:.18em;color:var(--green);margin:0 0 14px}.side .panel{margin-bottom:16px}
-.progress{height:6px;background:#17251d;margin:12px 0}.bar{height:100%;width:0;background:var(--green);transition:width .3s}
-.stage{display:none}.stage.active{display:block}.stamp{font-size:11px;color:var(--amber);letter-spacing:.15em}.clue{white-space:pre-wrap;background:#030604;border:1px solid #244c36;padding:16px;margin:15px 0;color:#b9f4cc;overflow-wrap:anywhere}
-label{display:block;color:var(--dim);font-size:12px;margin:14px 0 6px}input{width:100%;background:#020503;border:1px solid #326347;color:var(--green);padding:13px;font:inherit;outline:none}input:focus{border-color:var(--green);box-shadow:0 0 0 2px #8cffb422}
-button{font:inherit;cursor:pointer;background:#10251a;border:1px solid #4c9b6c;color:var(--green);padding:10px 14px;margin-top:10px}button:hover{background:#193b28}button.secondary{color:var(--dim);border-color:#294535;background:transparent}
-.feedback{min-height:26px;margin-top:10px;color:var(--amber);font-size:12px}.tiny{font-size:11px;color:#789181}.locked{color:#9a7777}.record{border-top:1px solid var(--line);padding:12px 0}.record strong{color:var(--green)}.footer{margin-top:28px;border-top:1px solid var(--line);padding-top:14px;color:#587362;font-size:10px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-details{border:1px solid #234a35;margin-top:12px;padding:10px}summary{color:var(--amber);cursor:pointer;font-size:12px}.hint{color:#a6bba9;font-size:12px;margin-top:8px}
-#terminal{min-height:120px;color:#9bdfb0}.hidden{display:none!important}.success{color:var(--green)}.danger{color:var(--red)}
-@media(max-width:760px){.grid{grid-template-columns:1fr}.side{display:grid;grid-template-columns:1fr 1fr;gap:12px}.side .panel{margin:0}.top{align-items:flex-start}.status{max-width:140px;text-align:center}}
-@media(max-width:460px){.side{grid-template-columns:1fr}.panel{padding:14px}.wrap{padding:18px 12px 50px}}
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Special+Elite&display=swap');
+:root{
+ --bg:#050606;--panel:#0b0e0d;--line:#26312b;
+ --green:#a4b9a8;--dim:#64736a;--red:#a54b4b;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:#c8d1ca;
+ font-family:'Share Tech Mono',monospace;
+ background-image:repeating-linear-gradient(
+ transparent 0px,transparent 3px,#ffffff05 4px);
+ min-height:100vh;
+}
+header{
+ padding:17px 20px;border-bottom:1px solid var(--line);
+ display:flex;justify-content:space-between;
+ font-size:10px;letter-spacing:2px;color:var(--dim);
+}
+main{max-width:780px;margin:55px auto;padding:0 18px 70px}
+.stamp{
+ display:inline-block;border:1px solid var(--red);
+ color:#bc6868;padding:7px 12px;font-size:10px;
+ letter-spacing:3px;transform:rotate(-2deg);
+}
+h1{
+ font-size:clamp(37px,9vw,72px);line-height:.95;
+ letter-spacing:4px;color:#e0e8e1;margin:30px 0 12px;
+ text-shadow:0 0 25px #a4b9a822;
+}
+.sub{font-size:11px;letter-spacing:4px;color:var(--dim);margin-bottom:45px}
+.panel{
+ background:var(--panel);border:1px solid var(--line);
+ padding:23px;margin-bottom:17px;
+ box-shadow:0 12px 40px #0009;
+}
+.label{font-size:10px;letter-spacing:3px;color:var(--dim);margin-bottom:17px}
+p{font-size:13px;line-height:1.9;color:#aab7ad}
+.red{color:#c27777}
+.green{color:#9ac5a2}
+hr{border:0;border-top:1px solid var(--line);margin:20px 0}
+.clue{
+ font-family:'Special Elite',serif;
+ font-size:19px;line-height:2;color:#e0e6e1;
+ white-space:pre-wrap;overflow-wrap:anywhere;
+}
+input{
+ display:block;width:100%;padding:16px;margin-top:18px;
+ background:#040605;border:1px solid #34443a;
+ color:#dce8de;font-family:inherit;font-size:14px;
+ outline:none;text-transform:uppercase;
+}
+input:focus{border-color:var(--green)}
+button{
+ background:#17221a;border:1px solid #4b6251;
+ color:#c9d8cc;padding:14px 17px;
+ font-family:inherit;font-size:10px;
+ letter-spacing:2px;margin-top:12px;cursor:pointer;
+}
+button:active{background:#293b2e}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row button{flex:1}
+#message{font-size:12px;margin-top:17px;min-height:18px}
+.hint{display:none;color:#92a79a;font-size:12px;line-height:1.7;margin-top:16px}
+.progress{height:3px;background:#1a241d;margin-top:14px}
+#bar{height:3px;background:#9db8a2;width:0%;transition:.4s}
+.small{font-size:10px;color:#617067}
+.hidden{display:none}
+footer{
+ text-align:center;border-top:1px solid var(--line);
+ padding:25px;color:#48564c;font-size:10px;letter-spacing:2px;
+}
+#final h2{font-size:30px;letter-spacing:3px}
+.secret{color:#84988a;font-size:12px;line-height:2}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="top"><div class="brand">INDEPENDENT PUZZLE ARCHIVE // 3302</div><div class="status" id="status">SESSION: UNVERIFIED</div></header>
-<h1>THE BLACK<br>ARCHIVE</h1>
-<div class="sub">A SIGNAL WITHOUT AN ORIGIN · RECORD SERIES 00–06</div>
-<div class="warning"><b>NOTICE:</b> This is an original fictional puzzle hunt. It is not affiliated with Cicada 3301. No personal information is requested or collected.</div>
-<div class="grid">
-<main class="panel">
-<div class="stamp">ARCHIVE ACCESS // <span id="recordNo">RECORD 00</span></div>
-<div class="progress"><div class="bar" id="bar"></div></div>
-<div id="intro" class="stage active">
-<h2>ENTRY CONDITION</h2>
-<p>The archive does not explain itself. Each record contains a key to the next. Preserve every answer exactly; the final record will require the sequence, not merely the last word.</p>
-<div class="clue">THE FIRST RULE IS SIMPLE:
+<header>
+ <span>BA // TERMINAL 09</span>
+ <span id="connection">CONNECTION: UNVERIFIED</span>
+</header>
 
-READ WHAT IS THERE.
-THEN READ WHAT IS MISSING.</div>
-<p class="tiny">Seven records. Six gates. One final synthesis. Hints are deliberately incomplete.</p>
-<button onclick="go(1)">REQUEST RECORD 01</button>
-</div>
-<section id="s1" class="stage">
-<h2>01 / THE DISPLACED MESSAGE</h2><p class="tiny">A shift is not a destination. It is a distance.</p>
-<div class="clue">WKH SDWK LV QRW WKH WHUPLQXV</div>
-<p>Decode the message. Submit the full phrase in plain English.</p>
-<details><summary>HINT 01-A</summary><div class="hint">The alphabet wraps around. The same displacement is applied to every letter.</div></details>
-<details><summary>HINT 01-B</summary><div class="hint">The familiar three-step Caesar shift is involved. Move letters backwards.</div></details>
-<label for="a1">RESPONSE</label><input id="a1" autocomplete="off" spellcheck="false" placeholder="ENTER DECODED PHRASE">
-<button onclick="check(1)">VERIFY</button><div class="feedback" id="f1"></div>
-</section>
-<section id="s2" class="stage">
-<h2>02 / THE QUIET ALPHABET</h2><p class="tiny">The machine speaks in eight places. Do not read it as a number.</p>
-<div class="clue">01001000 01001111 01001100 01001100 01001111 01010111</div>
-<p>Translate the transmission. The answer is one word.</p>
-<details><summary>HINT 02-A</summary><div class="hint">Every group contains eight binary digits: one byte.</div></details>
-<details><summary>HINT 02-B</summary><div class="hint">Interpret each byte as an ASCII character.</div></details>
-<label for="a2">RESPONSE</label><input id="a2" autocomplete="off" spellcheck="false" placeholder="ENTER ONE WORD">
-<button onclick="check(2)">VERIFY</button><div class="feedback" id="f2"></div>
-</section>
-<section id="s3" class="stage">
-<h2>03 / THE MARGIN INDEX</h2><p class="tiny">The archive's copyist made a mistake. Or so the report claims.</p>
-<div class="clue">R — Read the first mark.
-E — Examine the line.
-A — Attend to the silence.
-D — Decode the margin.
+<main>
+ <div class="stamp">RESTRICTED ACCESS // 2026</div>
+ <h1>THE BLACK<br>ARCHIVE</h1>
+ <div class="sub">THE TRUTH IS NOT IN THE RECORD.</div>
 
-T — Take note of the break.
-H — Hold the order.
-E — Extract the initials.
+ <section class="panel">
+  <div class="label">INITIAL TRANSMISSION / 0000</div>
+  <p>
+   If you can read this, the archive has already noticed you.
+   Five records remain sealed. Five answers are required.
+  </p>
+  <p class="red">Do not trust the order in which information appears.</p>
+  <hr>
+  <div class="small">ARCHIVE STATUS: <span id="status">SEALED</span></div>
+  <div class="progress"><div id="bar"></div></div>
+ </section>
 
-G — Gather the marks.
-A — Arrange nothing.
-P — Preserve the sequence.
-S — Submit the instruction.</div>
-<p>Take the first mark of each line. The blank lines divide the result into three words. What instruction appears?</p>
-<details><summary>HINT 03-A</summary><div class="hint">The first letters are not random. Read them from top to bottom, preserving the two blank-line breaks.</div></details>
-<details><summary>HINT 03-B</summary><div class="hint">The result is a three-word instruction. Keep the spaces where the blank lines separate the groups.</div></details>
-<label for="a3">RESPONSE</label><input id="a3" autocomplete="off" spellcheck="false" placeholder="ENTER THE INSTRUCTION">
-<button onclick="check(3)">VERIFY</button><div class="feedback" id="f3"></div>
-</section>
-<section id="s4" class="stage">
-<h2>04 / THE BROKEN INDEX</h2><p class="tiny">A list is a map when the order is intentional.</p>
-<div class="clue">06 / E
-02 / R
-05 / A
-01 / O
-04 / L
-03 / C</div>
-<p>Reorder the entries by their numbers. Read the letters. Submit the resulting six-letter word.</p>
-<details><summary>HINT 04-A</summary><div class="hint">Ignore the order in which the lines are printed.</div></details>
-<details><summary>HINT 04-B</summary><div class="hint">Sort 01 through 06, then concatenate the letters.</div></details>
-<label for="a4">RESPONSE</label><input id="a4" autocomplete="off" spellcheck="false" placeholder="ENTER SIX LETTERS">
-<button onclick="check(4)">VERIFY</button><div class="feedback" id="f4"></div>
-</section>
-<section id="s5" class="stage">
-<h2>05 / THE FALSE KEY</h2><p class="tiny">A key can be correct and still open the wrong door.</p>
-<div class="clue">VIGENERE
-CIPHERTEXT: LXFOPVEFRNHR
-KEY: LEMON</div>
-<p>Decrypt the ciphertext using the Vigenère cipher and the supplied key. Submit the plaintext.</p>
-<details><summary>HINT 05-A</summary><div class="hint">A=0, B=1 ... Z=25. Subtract the repeating key value from each ciphertext letter, wrapping around.</div></details>
-<details><summary>HINT 05-B</summary><div class="hint">The plaintext is a well-known five-word phrase in cryptography. This particular ciphertext decodes to a short phrase.</div></details>
-<label for="a5">RESPONSE</label><input id="a5" autocomplete="off" spellcheck="false" placeholder="ENTER PLAINTEXT">
-<button onclick="check(5)">VERIFY</button><div class="feedback" id="f5"></div>
-</section>
-<section id="s6" class="stage">
-<h2>06 / THE LAST WITNESS</h2><p class="tiny">The answer is not hidden in the sentence. It is hidden in its shape.</p>
-<div class="clue">A silent archive keeps its own counsel.
-Every witness leaves a trace.
-Never mistake noise for evidence.
-The final key was never written.
-Only the patient will notice.</div>
-<p>Take the first letter of each line. Then reverse the resulting five-letter sequence. Submit it.</p>
-<details><summary>HINT 06-A</summary><div class="hint">The first letters spell A E N T O.</div></details>
-<details><summary>HINT 06-B</summary><div class="hint">Reverse those letters. Do not rearrange them in any other way.</div></details>
-<label for="a6">RESPONSE</label><input id="a6" autocomplete="off" spellcheck="false" placeholder="ENTER FIVE LETTERS">
-<button onclick="check(6)">VERIFY</button><div class="feedback" id="f6"></div>
-</section>
-<section id="final" class="stage">
-<h2>07 / THE BLACK ARCHIVE</h2><p class="tiny">All records recovered. The final lock requires the chain.</p>
-<div class="clue">THE ARCHIVE REMEMBERS ORDER.
+ <section class="panel" id="game">
+  <div class="label" id="stageTitle">RECORD 01 // THE DISPLACEMENT</div>
+  <div class="clue" id="clue"></div>
+  <p id="question"></p>
+  <input id="answer" placeholder="ENTER ANSWER" autocomplete="off" spellcheck="false">
+  <div class="row">
+   <button onclick="submitAnswer()">VERIFY RESPONSE</button>
+   <button onclick="revealHint()">REQUEST CLUE</button>
+  </div>
+  <div id="message"></div>
+  <div class="hint" id="hint"></div>
+ </section>
 
-Record 01 → phrase
-Record 02 → word
-Record 03 → instruction
-Record 04 → index
-Record 05 → plaintext
-Record 06 → reversed witness
+ <section class="panel hidden" id="final">
+  <div class="stamp">AUTHENTICATION COMPLETE</div>
+  <h2>THE ARCHIVE IS OPEN.</h2>
+  <p>Five records. Five answers. One surviving witness.</p>
+  <hr>
+  <div class="secret">
+   RECORDS: 05 / 05<br>
+   AUTHORITY: UNKNOWN<br>
+   IDENTITY: UNRECORDED<br>
+   STATUS: ACCEPTED
+  </div>
+  <p class="red">You found the archive. You were never meant to find its author.</p>
+  <button onclick="restart()">RESET SESSION</button>
+ </section>
 
-Join the first letter of each recovered answer, in record order.
-Submit the six-letter key.</div>
-<details><summary>FINAL HINT</summary><div class="hint">Use the answers you submitted at each gate. Ignore spaces and punctuation. Take only the first letter of each answer, then concatenate.</div></details>
-<label for="af">FINAL KEY</label><input id="af" autocomplete="off" spellcheck="false" placeholder="SIX-LETTER KEY">
-<button onclick="checkFinal()">OPEN ARCHIVE</button><div class="feedback" id="ff"></div>
-</section>
-<section id="complete" class="stage">
-<div class="stamp success">CLEARANCE ACCEPTED</div><h2>ARCHIVE OPEN</h2>
-<div class="clue success">YOU FOUND THE BLACK ARCHIVE.
-
-The signal was never a location.
-It was a test of sequence.
-
-END OF RECORDS.
-NO FURTHER INSTRUCTIONS.</div>
-<p>You completed the fictional CICADA 3302 hunt. Your browser stores progress locally on this device only.</p>
-<button class="secondary" onclick="resetAll()">RESET THE ARCHIVE</button>
-</section>
+ <section class="panel">
+  <div class="label">SYSTEM FOOTNOTE</div>
+  <p class="small">
+   Every answer is case-insensitive. Spaces and punctuation are ignored.
+   Hints are available, but the archive will not solve itself.
+  </p>
+  <p class="small">SESSION ID: BA-09-UNKNOWN</p>
+ </section>
 </main>
-<aside class="side">
-<div class="panel"><h2>SESSION LOG</h2><div id="terminal">> awaiting authorization<br>> no external connection<br>> local session initialized</div></div>
-<div class="panel"><h2>RECOVERED RECORDS</h2><div id="records" class="tiny">00 — ENTRY CONDITION<br>01 — LOCKED<br>02 — LOCKED<br>03 — LOCKED<br>04 — LOCKED<br>05 — LOCKED<br>06 — LOCKED</div></div>
-<div class="panel"><h2>PROTOCOL</h2><p class="tiny">Answers are checked in this browser. No accounts, tracking, external scripts, or network calls. Case and extra spaces are ignored.</p><button class="secondary" onclick="showHelp()">SYSTEM NOTES</button></div>
-</aside>
-</div>
-<footer class="footer"><span>3302 // BLACK ARCHIVE</span><span>FICTIONAL PUZZLE HUNT · UNOFFICIAL</span><span id="clock">LOCAL SESSION</span></footer>
-</div>
+<footer>THE BLACK ARCHIVE // NO AUTHOR IDENTIFIED</footer>
+
 <script>
-const answers={1:"the path is not the terminus",2:"hollow",3:"read the gaps",4:"oracle",5:"attack at dawn",6:"otnea"};
-const labels=["ENTRY CONDITION","THE DISPLACED MESSAGE","THE QUIET ALPHABET","THE MARGIN INDEX","THE BROKEN INDEX","THE FALSE KEY","THE LAST WITNESS"];
-let unlocked=0, solved={}, chain=[];
+const records=[
+{
+ title:"RECORD 01 // THE DISPLACEMENT",
+ clue:"WKH WUXWK LV KLGGHQ LQ SODLQ VLJKW",
+ question:"A familiar shift hides the message. Decode it and submit the final word.",
+ answer:"SIGHT",
+ hint:"Each letter has moved three places forward. Move every letter three places backward."
+},
+{
+ title:"RECORD 02 // THE MACHINE",
+ clue:"01001111 01000010 01010011 01000101 01010010 01010110 01000101",
+ question:"The machine speaks in bytes. Translate the message. Submit the decoded word.",
+ answer:"OBSERVE",
+ hint:"Each group of eight bits represents one ASCII character."
+},
+{
+ title:"RECORD 03 // THE FIRST WITNESS",
+ clue:"Only the beginning survives.\nRead every margin carefully.\nDo not trust what follows.\nEverything begins somewhere.\nRemember the first mark.\nSilence is also evidence.\nExtract what remains.",
+ question:"Seven lines. One instruction. Read the first letter of every line.",
+ answer:"LDRERS E",
+ hint:"Take the first character of each line. Ignore the spaces between the resulting letters."
+},
+{
+ title:"RECORD 04 // THE FALSE TRAIL",
+ clue:"Vigenere key: NIGHT\n\nXKXGQJY",
+ question:"A repeating key changes the alphabet. Decode the seven-letter message and submit it.",
+ answer:"MYSTERY",
+ hint:"Use the Vigenere cipher. The key repeats as NIGHTNI. Subtract each key letter from the corresponding message letter."
+},
+{
+ title:"RECORD 05 // THE LAST DOOR",
+ clue:"20 / 8 / 5\n2 / 5 / 7 / 9 / 14 / 14 / 9 / 14 / 7\n9 / 19\n14 / 15 / 20\n20 / 8 / 5\n5 / 14 / 4",
+ question:"A is 1. Z is 26. Decode the message. Submit the final word.",
+ answer:"END",
+ hint:"Convert each number into its matching alphabet letter. Read all four lines."
+}
+];
+
+let current=0;
+let finished=false;
+
 const $=id=>document.getElementById(id);
-function normalize(s){return s.toLowerCase().trim().replace(/[^a-z0-9 ]/g,"").replace(/\s+/g," ")}
-function log(s){$("terminal").innerHTML+="<br>> "+s;$("terminal").scrollTop=$("terminal").scrollHeight}
-function go(n){document.querySelectorAll(".stage").forEach(x=>x.classList.remove("active"));$("s"+n).classList.add("active");$("recordNo").textContent="RECORD 0"+n;log("record 0"+n+" opened");window.scrollTo({top:0,behavior:"smooth"})}
-function render(){let count=Object.keys(solved).length;$("bar").style.width=(count/6*100)+"%";$("status").textContent=count===6?"SESSION: FINAL GATE":"SESSION: "+count+"/6 VERIFIED";$("records").innerHTML="00 — ENTRY CONDITION"+[1,2,3,4,5,6].map(n=>"<br>"+("0"+n)+" — "+(solved[n]?"<span class='success'>RECOVERED</span>":"LOCKED")).join("")}
-function check(n){let val=normalize($("a"+n).value);let expected=normalize(answers[n]);if(val===expected){solved[n]=true;chain[n-1]=$("a"+n).value.trim();$("f"+n).innerHTML="<span class='success'>RECORD ACCEPTED. NEXT GATE RELEASED.</span>";log("record 0"+n+" verified");render();setTimeout(()=>{if(n<6)go(n+1);else{document.querySelectorAll(".stage").forEach(x=>x.classList.remove("active"));$("final").classList.add("active");$("recordNo").textContent="RECORD 07";log("final synthesis required")}},650)}else{$("f"+n).innerHTML="<span class='danger'>REJECTED. THE ARCHIVE DOES NOT REPEAT ITSELF.</span>";log("incorrect response at record 0"+n)}}
-function checkFinal(){let key=chain.map(x=>normalize(x).replace(/ /g,"")[0]||"").join("");let input=normalize($("af").value).replace(/ /g,"");if(input===key&&key.length===6){document.querySelectorAll(".stage").forEach(x=>x.classList.remove("active"));$("complete").classList.add("active");$("recordNo").textContent="CLEARANCE 07";log("final key accepted");render()}else{$("ff").innerHTML="<span class='danger'>ACCESS DENIED. THE CHAIN IS INCOMPLETE OR OUT OF ORDER.</span>";log("final key rejected")}}
-function showHelp(){alert("SYSTEM NOTES\\n\\nThis is a self-contained fictional puzzle hunt. Solve each record in order. Hints are optional. Your progress is stored only in this page's memory and is not sent anywhere. Refreshing resets the session.")}
-function resetAll(){if(!confirm("Reset all records and start over?"))return;solved={};chain=[];[1,2,3,4,5,6].forEach(n=>{$("a"+n).value="";$("f"+n).textContent=""});$("af").value="";$("ff").textContent="";document.querySelectorAll(".stage").forEach(x=>x.classList.remove("active"));$("intro").classList.add("active");$("recordNo").textContent="RECORD 00";$("terminal").innerHTML="> session reset<br>> awaiting authorization";render();window.scrollTo({top:0,behavior:"smooth"})}
+
+function normalize(value){
+ return value.toUpperCase().replace(/[^A-Z]/g,"");
+}
+function render(){
+ const r=records[current];
+ $("stageTitle").textContent=r.title;
+ $("clue").textContent=r.clue;
+ $("question").textContent=r.question;
+ $("answer").value="";
+ $("message").textContent="";
+ $("message").className="";
+ $("hint").textContent=r.hint;
+ $("hint").style.display="none";
+ $("bar").style.width=(current/records.length*100)+"%";
+ $("status").textContent="RECORD "+(current+1)+" / 05";
+}
+function submitAnswer(){
+ if(finished)return;
+ const input=normalize($("answer").value);
+ if(input===records[current].answer){
+  $("message").textContent="RESPONSE ACCEPTED // RECORD UNSEALED";
+  $("message").className="green";
+  setTimeout(()=>{
+   current++;
+   if(current===records.length){
+    finished=true;
+    $("game").classList.add("hidden");
+    $("final").classList.remove("hidden");
+    $("bar").style.width="100%";
+    $("status").textContent="ARCHIVE OPEN";
+    $("connection").textContent="CONNECTION: AUTHENTICATED";
+   }else render();
+  },850);
+ }else{
+  $("message").textContent="RESPONSE REJECTED // TRY AGAIN";
+  $("message").className="red";
+ }
+}
+function revealHint(){
+ $("hint").style.display="block";
+}
+function restart(){
+ current=0;
+ finished=false;
+ $("final").classList.add("hidden");
+ $("game").classList.remove("hidden");
+ $("connection").textContent="CONNECTION: UNVERIFIED";
+ render();
+}
+$("answer").addEventListener("keydown",e=>{
+ if(e.key==="Enter")submitAnswer();
+});
 render();
 </script>
-</body></html>
+</body>
+</html>
+
