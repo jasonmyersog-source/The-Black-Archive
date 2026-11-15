@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CICADA 3302 // CLASSIFIED ARCHIVE</title>
+<style>
+:root{--bg:#080b0a;--panel:#101614;--line:#29352f;--green:#a6c5ad;--muted:#718078;--red:#bd665d;--paper:#d5ddd5}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#1c2922 0%,#080b0a 55%);color:var(--paper);font:14px/1.55 "Courier New",monospace;min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background:repeating-linear-gradient(0deg,transparent 0 3px,#7f9c88 4px);mix-blend-mode:screen}
+header{border-bottom:1px solid var(--line);padding:17px clamp(16px,5vw,60px);display:flex;justify-content:space-between;align-items:center;gap:15px;position:relative;background:#080d0bdb}
+.brand{letter-spacing:.22em;color:var(--green);font-weight:bold}.status{font-size:11px;color:#b3b9a8;letter-spacing:.12em}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#8da78f;margin-right:8px;box-shadow:0 0 9px #8da78f}
+main{width:min(980px,92vw);margin:48px auto 70px}.stamp{display:inline-block;border:1px solid #8c514a;color:#d28a7e;padding:5px 10px;letter-spacing:.2em;font-size:10px;transform:rotate(-1deg)}
+h1{font-size:clamp(38px,8vw,76px);line-height:1;margin:18px 0 9px;letter-spacing:.09em;color:#dce5dc;font-weight:500}
+.subtitle{color:var(--muted);letter-spacing:.18em;font-size:11px;margin-bottom:35px}
+.grid{display:grid;grid-template-columns:1.25fr .75fr;gap:16px}.panel{border:1px solid var(--line);background:linear-gradient(145deg,#111a16ed,#0c110fef);padding:22px;box-shadow:0 15px 50px #0005}
+.panel h2{font-size:12px;color:var(--green);letter-spacing:.2em;font-weight:normal;margin:0 0 17px}.rule{height:1px;background:var(--line);margin:18px 0}
+.label{font-size:10px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}.transmission{font-size:16px;line-height:1.8;white-space:pre-wrap;color:#d4ded5;margin:14px 0}
+.codebox{background:#070b09;border:1px solid #29372f;padding:18px;color:#c4d8c7;font-size:clamp(19px,4vw,27px);letter-spacing:.18em;text-align:center;margin:18px 0}
+input{width:100%;background:#070b09;border:1px solid #34453a;color:#e4eee5;padding:14px;font:14px "Courier New";outline:none}input:focus{border-color:#9cb9a2;box-shadow:0 0 0 2px #9cb9a21c}
+button{background:#c5d6c8;color:#0a100c;border:0;padding:13px 17px;font:bold 11px "Courier New";letter-spacing:.15em;cursor:pointer;margin-top:10px}button:hover{background:#e1ece2}button.secondary{background:transparent;color:var(--green);border:1px solid #52685a}button.secondary:hover{background:#19241d}
+.actions{display:flex;gap:9px;flex-wrap:wrap}.feedback{min-height:26px;margin-top:12px;color:var(--red);font-size:12px}.feedback.good{color:#a6c5ad}
+.side p{color:#a2afa5;font-size:12px}.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;letter-spacing:.12em}.progress{height:4px;background:#26332b;margin:12px 0 18px}.bar{height:100%;width:0;background:#9bb59f;transition:width .4s}
+.hint{display:none;border-left:2px solid #9aab91;padding:9px 12px;margin-top:12px;color:#aeb9aa;font-size:12px;background:#111a15}
+.log{font-size:11px;color:#7e8d82;line-height:1.9;white-space:pre-wrap}
+footer{border-top:1px solid var(--line);padding:18px 5vw;color:#58675d;font-size:10px;letter-spacing:.12em;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hidden{display:none!important}
+@media(max-width:700px){.grid{grid-template-columns:1fr}main{margin-top:30px}.panel{padding:18px}header{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="brand">C / 3302 &nbsp; // &nbsp; ARCHIVE DIVISION</div><div class="status"><span class="dot"></span>LOCAL SESSION // ENCRYPTED</div></header>
+<main>
+<div class="stamp">RESTRICTED ACCESS · FILE 3302-A</div>
+<h1>CICADA 3302</h1>
+<div class="subtitle">AN UNATTRIBUTED SIGNAL HAS ENTERED THE ARCHIVE</div>
+<div class="grid">
+<section class="panel">
+<h2>01 / INCOMING TRANSMISSION</h2>
+<div class="meta"><span>ORIGIN: UNKNOWN</span><span id="date">DATE: --/--/----</span></div>
+<div class="rule"></div>
+<div class="transmission" id="message">The archive has no record of who opened this file.
+There is no sender, no return address, and no verified origin.
+
+Only one fragment survived the transfer.</div>
+<div class="label">RECOVERED FRAGMENT // ROTATION CIPHER</div>
+<div class="codebox" id="cipher">WKH GRRU LV RSHQ</div>
+<label class="label" for="answer">ENTER DECODED MESSAGE</label>
+<input id="answer" autocomplete="off" spellcheck="false" placeholder="Type your answer..." />
+<div class="actions"><button id="submit">SUBMIT RESPONSE</button><button class="secondary" id="hintBtn">REQUEST HINT</button><button class="secondary" id="reset">RESET FILE</button></div>
+<div class="feedback" id="feedback" aria-live="polite"></div>
+<div class="hint" id="hint">Hint 01: Each letter has been shifted three places forward in the alphabet. Move each letter three places backward.</div>
+<div class="hidden" id="next">
+<div class="rule"></div><h2>02 / FILE UNSEALED</h2>
+<p class="transmission">The first fragment was not a greeting. It was an instruction.
+
+A second record has been attached to this file.</p>
+<div class="label">ARCHIVE NOTE</div>
+<div class="codebox">01001000 01001001 01000100 01000100 01000101 01001110</div>
+<label class="label" for="answer2">WHAT WORD DOES THE BINARY SPELL?</label>
+<input id="answer2" autocomplete="off" spellcheck="false" placeholder="Decoded word..." />
+<button id="submit2">VERIFY SECOND FRAGMENT</button>
+<div class="feedback" id="feedback2" aria-live="polite"></div>
+<div class="hint" id="hint2">Hint 02: Read each 8-bit group as an ASCII character.</div>
+<button class="secondary" id="hintBtn2">REQUEST HINT</button>
+</div>
+<div class="hidden" id="final">
+<div class="rule"></div><h2>03 / ARCHIVE FOOTNOTE</h2>
+<p class="transmission">Two fragments match. The archive accepts your response.
+
+A final note appears in the margin:
+
+“Not every locked file is meant to stay closed.
+Some are waiting for the right question.”</p>
+<div class="stamp">ACCESS GRANTED // SESSION COMPLETE</div>
+</div>
+</section>
+<aside class="panel side">
+<h2>SESSION DETAILS</h2>
+<div class="label">OPERATOR</div><p>UNIDENTIFIED VISITOR</p>
+<div class="label">CLEARANCE</div><p id="clearance">LEVEL 0 / UNVERIFIED</p>
+<div class="label">ARCHIVE PROGRESS</div><div class="progress"><div class="bar" id="bar"></div></div>
+<div class="meta"><span>FRAGMENTS RECOVERED</span><span id="count">0 / 2</span></div>
+<div class="rule"></div>
+<h2>ACTIVITY LOG</h2><div class="log" id="log">[SYSTEM] Local archive initialized.
+[SYSTEM] No external connection detected.
+[FILE] Waiting for response...</div>
+<div class="rule"></div>
+<p>This is an original fictional puzzle hunt. All puzzles run in your browser; no account, camera, microphone, location, or private data is accessed.</p>
+</aside>
+</div>
+</main>
+<footer><span>CICADA 3302 // FICTIONAL ARCHIVE INTERFACE</span><span>NO EXTERNAL TRANSMISSION · BUILD 01.02</span></footer>
+<script>
+const $=id=>document.getElementById(id);
+$("date").textContent="DATE: "+new Date().toISOString().slice(0,10);
+let stage=0,hints=0;
+function log(s){$("log").textContent+="\n"+s}
+function update(){ $("count").textContent=stage+" / 2";$("bar").style.width=(stage*50)+"%";$("clearance").textContent=stage===0?"LEVEL 0 / UNVERIFIED":stage===1?"LEVEL 1 / PROVISIONAL":"LEVEL 2 / ARCHIVE ACCESS"; }
+function first(){let v=$("answer").value.trim().toLowerCase().replace(/[.!?]/g,"");if(v==="the door is open"){stage=1;$("feedback").textContent="RESPONSE ACCEPTED. FILE 3302-B ATTACHED.";$("feedback").className="feedback good";$("next").classList.remove("hidden");log("[VERIFY] Fragment 01 accepted.");update();}else{$("feedback").textContent="NO MATCH. CHECK THE SHIFT AND TRY AGAIN.";log("[VERIFY] Unmatched response.");}}
+function second(){let v=$("answer2").value.trim().toLowerCase();if(v==="hidden"){stage=2;$("feedback2").textContent="MATCH CONFIRMED. ARCHIVE ACCESS GRANTED.";$("feedback2").className="feedback good";$("final").classList.remove("hidden");log("[VERIFY] Fragment 02 accepted.");log("[SYSTEM] Session complete.");update();}else{$("feedback2").textContent="NO MATCH. RECHECK THE BINARY GROUPS.";log("[VERIFY] Unmatched second response.");}}
+$("submit").onclick=first;$("answer").addEventListener("keydown",e=>{if(e.key==="Enter")first()});
+$("submit2").onclick=second;$("answer2").addEventListener("keydown",e=>{if(e.key==="Enter")second()});
+$("hintBtn").onclick=()=>{$("hint").style.display="block";hints++;log("[HINT] Hint 01 requested.");};
+$("hintBtn2").onclick=()=>{$("hint2").style.display="block";log("[HINT] Hint 02 requested.");};
+$("reset").onclick=()=>{stage=0;$("answer").value="";$("answer2").value="";$("feedback").textContent="";$("feedback2").textContent="";$("next").classList.add("hidden");$("final").classList.add("hidden");$("hint").style.display="none";$("hint2").style.display="none";$("log").textContent="[SYSTEM] Local archive initialized.\n[SYSTEM] No external connection detected.\n[FILE] Waiting for response...";update();};
+update();
+</script>
+</body></html>
