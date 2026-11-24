@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050606">
+<title>THE BLACK ARCHIVE</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Special+Elite&display=swap');
+:root{
+ --bg:#050606;--panel:#0b0e0d;--line:#26312b;
+ --green:#a4b9a8;--dim:#64736a;--red:#a54b4b;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:#c8d1ca;
+ font-family:'Share Tech Mono',monospace;
+ background-image:repeating-linear-gradient(
+ transparent 0px,transparent 3px,#ffffff05 4px);
+ min-height:100vh;
+}
+header{
+ padding:17px 20px;border-bottom:1px solid var(--line);
+ display:flex;justify-content:space-between;
+ font-size:10px;letter-spacing:2px;color:var(--dim);
+}
+main{max-width:780px;margin:55px auto;padding:0 18px 70px}
+.stamp{
+ display:inline-block;border:1px solid var(--red);
+ color:#bc6868;padding:7px 12px;font-size:10px;
+ letter-spacing:3px;transform:rotate(-2deg);
+}
+h1{
+ font-size:clamp(37px,9vw,72px);line-height:.95;
+ letter-spacing:4px;color:#e0e8e1;margin:30px 0 12px;
+ text-shadow:0 0 25px #a4b9a822;
+}
+.sub{font-size:11px;letter-spacing:4px;color:var(--dim);margin-bottom:45px}
+.panel{
+ background:var(--panel);border:1px solid var(--line);
+ padding:23px;margin-bottom:17px;
+ box-shadow:0 12px 40px #0009;
+}
+.label{font-size:10px;letter-spacing:3px;color:var(--dim);margin-bottom:17px}
+p{font-size:13px;line-height:1.9;color:#aab7ad}
+.red{color:#c27777}
+.green{color:#9ac5a2}
+hr{border:0;border-top:1px solid var(--line);margin:20px 0}
+.clue{
+ font-family:'Special Elite',serif;
+ font-size:19px;line-height:2;color:#e0e6e1;
+ white-space:pre-wrap;overflow-wrap:anywhere;
+}
+input{
+ display:block;width:100%;padding:16px;margin-top:18px;
+ background:#040605;border:1px solid #34443a;
+ color:#dce8de;font-family:inherit;font-size:14px;
+ outline:none;text-transform:uppercase;
+}
+input:focus{border-color:var(--green)}
+button{
+ background:#17221a;border:1px solid #4b6251;
+ color:#c9d8cc;padding:14px 17px;
+ font-family:inherit;font-size:10px;
+ letter-spacing:2px;margin-top:12px;cursor:pointer;
+}
+button:active{background:#293b2e}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.row button{flex:1}
+#message{font-size:12px;margin-top:17px;min-height:18px}
+.hint{display:none;color:#92a79a;font-size:12px;line-height:1.7;margin-top:16px}
+.progress{height:3px;background:#1a241d;margin-top:14px}
+#bar{height:3px;background:#9db8a2;width:0%;transition:.4s}
+.small{font-size:10px;color:#617067}
+.hidden{display:none}
+footer{
+ text-align:center;border-top:1px solid var(--line);
+ padding:25px;color:#48564c;font-size:10px;letter-spacing:2px;
+}
+#final h2{font-size:30px;letter-spacing:3px}
+.secret{color:#84988a;font-size:12px;line-height:2}
+</style>
+</head>
+<body>
+<header>
+ <span>BA // TERMINAL 09</span>
+ <span id="connection">CONNECTION: UNVERIFIED</span>
+</header>
+
+<main>
+ <div class="stamp">RESTRICTED ACCESS // 2026</div>
+ <h1>THE BLACK<br>ARCHIVE</h1>
+ <div class="sub">THE TRUTH IS NOT IN THE RECORD.</div>
+
+ <section class="panel">
+  <div class="label">INITIAL TRANSMISSION / 0000</div>
+  <p>
+   If you can read this, the archive has already noticed you.
+   Five records remain sealed. Five answers are required.
+  </p>
+  <p class="red">Do not trust the order in which information appears.</p>
+  <hr>
+  <div class="small">ARCHIVE STATUS: <span id="status">SEALED</span></div>
+  <div class="progress"><div id="bar"></div></div>
+ </section>
+
+ <section class="panel" id="game">
+  <div class="label" id="stageTitle">RECORD 01 // THE DISPLACEMENT</div>
+  <div class="clue" id="clue"></div>
+  <p id="question"></p>
+  <input id="answer" placeholder="ENTER ANSWER" autocomplete="off" spellcheck="false">
+  <div class="row">
+   <button onclick="submitAnswer()">VERIFY RESPONSE</button>
+   <button onclick="revealHint()">REQUEST CLUE</button>
+  </div>
+  <div id="message"></div>
+  <div class="hint" id="hint"></div>
+ </section>
+
+ <section class="panel hidden" id="final">
+  <div class="stamp">AUTHENTICATION COMPLETE</div>
+  <h2>THE ARCHIVE IS OPEN.</h2>
+  <p>Five records. Five answers. One surviving witness.</p>
+  <hr>
+  <div class="secret">
+   RECORDS: 05 / 05<br>
+   AUTHORITY: UNKNOWN<br>
+   IDENTITY: UNRECORDED<br>
+   STATUS: ACCEPTED
+  </div>
+  <p class="red">You found the archive. You were never meant to find its author.</p>
+  <button onclick="restart()">RESET SESSION</button>
+ </section>
+
+ <section class="panel">
+  <div class="label">SYSTEM FOOTNOTE</div>
+  <p class="small">
+   Every answer is case-insensitive. Spaces and punctuation are ignored.
+   Hints are available, but the archive will not solve itself.
+  </p>
+  <p class="small">SESSION ID: BA-09-UNKNOWN</p>
+ </section>
+</main>
+<footer>THE BLACK ARCHIVE // NO AUTHOR IDENTIFIED</footer>
+
+<script>
+const records=[
+{
+ title:"RECORD 01 // THE DISPLACEMENT",
+ clue:"WKH WUXWK LV KLGGHQ LQ SODLQ VLJKW",
+ question:"A familiar shift hides the message. Decode it and submit the final word.",
+ answer:"SIGHT",
+ hint:"Each letter has moved three places forward. Move every letter three places backward."
+},
+{
+ title:"RECORD 02 // THE MACHINE",
+ clue:"01001111 01000010 01010011 01000101 01010010 01010110 01000101",
+ question:"The machine speaks in bytes. Translate the message. Submit the decoded word.",
+ answer:"OBSERVE",
+ hint:"Each group of eight bits represents one ASCII character."
+},
+{
+  title:"RECORD 03 // THE FIRST WITNESS",
+  clue:"Only the beginning survives.\nRead every margin carefully.\nDo not trust what follows.\nEverything begins somewhere.\nRemember the first mark.\nSilence is also evidence.",
+  question:"Six lines. One instruction. Read the first letter of every line.",
+  answer:"ORDERS",
+  hint:"Take the first character of each line. Ignore the spaces between the resulting letters."
+},
+{
+  title: "RECORD 04 // THE FALSE TRAIL",
+  clue: "20-8-5 / 20-18-21-20-8\n9-19 / 8-9-4-4-5-14",
+  question: "Numbers have replaced letters. A is 1 and Z is 26. Decode the message, then identify what this record represents.",
+  answer: "MYSTERY",
+  hint: "Convert each number into its matching alphabet letter. The final word describes the unknown."
+},
+{
+  title: "RECORD 05 // THE LAST DOOR",
+  clue: "20 8 5\n2 5 7 9 14 14 9 14 7\n9 19\n14 15 20\n20 8 5\n5 14 4",
+  question: "A is 1. Z is 26. Decode the message. Submit the final word.",
+  answer: "END",
+  hint: "Convert each number into its matching alphabet letter."
+}
+];
+
+let current=0;
+let finished=false;
+
+const $=id=>document.getElementById(id);
+
+function normalize(value){
+ return value.toUpperCase().replace(/[^A-Z]/g,"");
+}
+function render(){
+ const r=records[current];
+ $("stageTitle").textContent=r.title;
+ $("clue").textContent=r.clue;
+ $("question").textContent=r.question;
+ $("answer").value="";
+ $("message").textContent="";
+ $("message").className="";
+ $("hint").textContent=r.hint;
+ $("hint").style.display="none";
+ $("bar").style.width=(current/records.length*100)+"%";
+ $("status").textContent="RECORD "+(current+1)+" / 05";
+}
+function submitAnswer(){
+ if(finished)return;
+ const input=normalize($("answer").value);
+ if(input===records[current].answer){
+  $("message").textContent="RESPONSE ACCEPTED // RECORD UNSEALED";
+  $("message").className="green";
+  setTimeout(()=>{
+   current++;
+   if(current===records.length){
+    finished=true;
+    $("game").classList.add("hidden");
+    $("final").classList.remove("hidden");
+    $("bar").style.width="100%";
+    $("status").textContent="ARCHIVE OPEN";
+    $("connection").textContent="CONNECTION: AUTHENTICATED";
+   }else render();
+  },850);
+ }else{
+  $("message").textContent="RESPONSE REJECTED // TRY AGAIN";
+  $("message").className="red";
+ }
+}
+function revealHint(){
+ $("hint").style.display="block";
+}
+function restart(){
+ current=0;
+ finished=false;
+ $("final").classList.add("hidden");
+ $("game").classList.remove("hidden");
+ $("connection").textContent="CONNECTION: UNVERIFIED";
+ render();
+}
+$("answer").addEventListener("keydown",e=>{
+ if(e.key==="Enter")submitAnswer();
+});
+render();
+</script>
+</body>
+  </html>
